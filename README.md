@@ -37,6 +37,8 @@ The PHP variant also circumvents ["shell_exec" restrictions](https://www.cyberci
 1. Upload `memexec.php` and `egg` (your backdoor) onto the target
 2. Call `curl -SsfL https://target/memexec.php` will execute `egg`
 
+(This is my way of saying "hey. how are to?" to my old [team-teso](https://en.wikipedia.org/wiki/TESO_(Austrian_hacker_group)) colleague and long time PHP developer [@i0nic](https://x.com/i0n1c))
+
 ---
 
 For the addicts, here is the nasm of the shellcode (memfd_create, copy loop & execveat):
