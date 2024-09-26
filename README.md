@@ -9,7 +9,7 @@ Use _one_ of the 3 scripts (perl, bash, php):
 - Mostly the binary can be piped directly from the Internet into the memory (and executed there)
 - Works as non-root users
 - The PHP variant also circumvents PHP's "exec" restrictions.
-- It injects shellcode into the running process and calls [memfd_create(2)](https://man7.org/linux/man-pages/man2/memfd_create.2.html) and [execveat(2)](https://man7.org/linux/man-pages/man2/execveat.2.html).
+- It injects shellcode into the running process and calls [memfd_create(2)](https://man7.org/linux/man-pages/man2/memfd_create.2.html) and [execveat(2)](https://man7.org/linux/man-pages/man2/execveat.2.html) to load a binary from a noexec-partition (or directly from the Internet).
 - BASH and PHP do not support SYSCALLS. We advanced an old trick.
 
 Read the [circumventing the noexec Article](SOON) for more....
