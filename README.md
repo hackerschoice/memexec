@@ -71,9 +71,9 @@ loop:
     cmp     rax, 0x00
     jle     done        ; EOF
 
-    mov     rdx, rax    ; arg 2: length (from read()) 
+    mov     rdx, rax    ; arg 3: length (from read()) 
     mov     eax, 0x01   ; arg 0: write_NR
-    mov     rdi, r8     ; arg 3: FD [memfd]
+    mov     rdi, r8     ; arg 1: FD [memfd]
     syscall
     jmp     loop
 done:
