@@ -41,13 +41,13 @@ done:
 
     mov     rax, 322    ; arg 0: execveat_NR
     mov     rdi, r8     ; arg 1: memfd
-    push    0x00
+    push    0x00        ; an empty string
     mov     rsi, rsp    ; arg 2: path (empty string)
-    mov     rdx, rsp    ; arg 3: ARGV points to 0x0.
-    xor     rcx, rcx    ; arg 4: ENV ?
-    xor     r9, r9      ; arg 4: ENV ?
-    xor     r10, r10    ; arg 4: ENV
+    mov     rdx, rsp    ; arg 3: ARGV points to empty string
+    xor     rcx, rcx    ; arg 4: ENV
     mov     r8, 0x1000  ; arg 5: AT_EMPTY_PATH
+    xor     r9, r9      ; arg 6: must be clean
+    xor     r10, r10    ; arg 7: must be clean
     syscall
     
     mov     rax, 60
