@@ -12,7 +12,7 @@ Use _one_ of the 3 scripts (perl, bash, php):
 - It injects shellcode into the running process and calls [memfd_create(2)](https://man7.org/linux/man-pages/man2/memfd_create.2.html) and [execveat(2)](https://man7.org/linux/man-pages/man2/execveat.2.html) to load a binary from a noexec-partition (or directly from the Internet).
 - BASH and PHP do not support SYSCALLS. We advanced an old trick.
 
-Read the [circumventing the noexec Article](SOON) for more....
+Read the [circumventing the noexec Article](https://iq.thc.org/bypassing-noexec-and-executing-arbitrary-binaries) for more....
 
 PERL example:
 ```sh
