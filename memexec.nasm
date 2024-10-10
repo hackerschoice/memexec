@@ -43,7 +43,7 @@ done:
     mov     rdi, r8     ; arg 1: memfd
     push    0x00
     mov     rsi, rsp    ; arg 2: path (empty string)
-    xor     rdx, rdx    ; arg 3: ARGV [NULL]
+    mov     rdx, rsp    ; arg 3: ARGV points to 0x0.
     xor     rcx, rcx    ; arg 4: ENV ?
     xor     r9, r9      ; arg 4: ENV ?
     xor     r10, r10    ; arg 4: ENV
