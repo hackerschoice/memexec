@@ -4,5 +4,5 @@ memexec() { bash -c 'cd /proc/$$;exec 4>mem;base64 -d<<<SIngTTHSSIM4AHUQSIN4CCF1
 
 # Example: 
 #  cat /usr/bin/id | memexec 
-#  cat /bin/ls | THC=AWSM memexec -- -lah
+#  cat /bin/ls | TIME_STYLE=+%s memexec -- -lah
 
