@@ -32,7 +32,7 @@ cat /bin/ls | TIME_STYLE=+%s memexec -- -lah
 ### The PHP variant also circumvents ["shell_exec" restrictions](https://www.cyberciti.biz/faq/linux-unix-apache-lighttpd-phpini-disable-functions/).
 
 1. Upload `memexec.php` and `egg` (your backdoor) onto the target
-2. Call `curl -SsfL https://target/memexec.php` will execute `egg`
+2. Call `curl -SsfL https://target/memexec.php` to execute `egg` and bypassing noexec restrictions
 
 (This is my way of saying "hey. how are to?" to my old [team-teso](https://en.wikipedia.org/wiki/TESO_(Austrian_hacker_group)) colleague and long time PHP developer [@i0nic](https://x.com/i0n1c))
 
