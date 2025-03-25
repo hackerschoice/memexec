@@ -16,6 +16,13 @@ Read the [circumventing the noexec Article](https://iq.thc.org/bypassing-noexec-
 
 `TIME_STYLE` and `-lah` are used as an example to pass through environment parameters and command line options. 
 
+### nasm example:
+```sh
+nasm -f elf64 memexec-bash.nasm -o memexec-bash.o
+ld memexec-bash.o -o memexec-bash
+cat /bin/ls | ./memexec-bash -- /bin/ls
+```
+
 ### PERL example:
 ```sh
 source memexec-perl.sh
